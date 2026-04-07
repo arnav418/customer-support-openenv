@@ -1,0 +1,41 @@
+name: customer_support_env
+description: >
+  A real-world customer support simulation where an AI agent responds to user issues
+  like payment failures, app crashes, and billing problems.
+
+version: "1.0"
+
+base_url: http://localhost:8000
+
+endpoints:
+  reset:
+    path: /reset
+    method: POST
+
+  step:
+    path: /step
+    method: POST
+
+  state:
+    path: /state
+    method: GET
+
+observation_space:
+  type: string
+  description: The current customer query or system feedback
+
+action_space:
+  type: object
+  properties:
+    message:
+      type: string
+      description: Response given by the agent
+
+reward:
+  type: float
+  description: Reward based on correctness of response
+  range: [-0.2, 1.0]
+
+done:
+  type: boolean
+  description: Whether the task is completed
